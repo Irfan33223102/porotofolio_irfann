@@ -159,7 +159,7 @@
   .cert-valid { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); font-size: 0.85rem; }
   .cert-valid i { color: var(--accent); }
   
-  /* ===== PERBAIKAN UNTUK FOTO PROYEK ===== */
+  /* ===== PERBAIKAN KHUSUS MOBILE UNTUK PROJECTS ===== */
   .projects-grid { 
     display: grid; 
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
@@ -212,11 +212,7 @@
   .project-desc { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; }
   .project-link { color: var(--accent); text-decoration: none; font-weight: 500; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; display: inline-flex; align-items: center; gap: 0.5rem; transition: gap 0.3s; cursor: pointer; background: none; border: none; padding: 0; font-family: inherit; align-self: flex-start; }
   .project-link:hover { gap: 1rem; }
-  .add-project { border: 2px dashed var(--border-strong); background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 450px; text-align: center; padding: 2rem; transition: all 0.4s; }
-  .add-project:hover { border-color: var(--accent); background: rgba(201, 169, 97, 0.03); }
-  .add-project i { font-size: 3rem; color: var(--accent); margin-bottom: 1rem; opacity: 0.5; }
-  .add-project h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; margin-bottom: 0.5rem; color: var(--accent); }
-  .add-project p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.5rem; max-width: 280px; }
+  
   .modal-overlay { position: fixed; inset: 0; background: rgba(0, 0, 0, 0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 2rem; opacity: 0; visibility: hidden; transition: all 0.4s ease; overflow-y: auto; }
   .modal-overlay.active { opacity: 1; visibility: visible; }
   .modal-content { background: var(--bg-card); border: 1px solid var(--border); max-width: 900px; width: 100%; max-height: 90vh; overflow-y: auto; position: relative; transform: translateY(30px) scale(0.95); transition: transform 0.4s ease; scrollbar-width: thin; scrollbar-color: var(--accent-dark) var(--bg-tertiary); }
@@ -288,6 +284,7 @@
   .reveal-left.active { opacity: 1; transform: translateX(0); }
   .reveal-right { opacity: 0; transform: translateX(40px); transition: all 1s cubic-bezier(0.4, 0, 0.2, 1); }
   .reveal-right.active { opacity: 1; transform: translateX(0); }
+  
   @media (max-width: 968px) {
     nav { padding: 1rem 5%; } section { padding: 4rem 5%; } .hero { padding: 7rem 5% 3rem; }
     .hero-container, .about-grid { grid-template-columns: 1fr; gap: 3rem; } .hero-photo { order: -1; }
@@ -296,12 +293,17 @@
     .nav-links { position: fixed; top: 70px; right: -100%; flex-direction: column; background: var(--bg-secondary); width: 280px; padding: 2rem; border-left: 1px solid var(--border); height: calc(100vh - 70px); transition: right 0.3s; }
     .nav-links.active { right: 0; } .menu-toggle { display: block; } .section-header { flex-direction: column; align-items: flex-start; }
     .modal-content { max-height: 95vh; } .modal-body { padding: 1.5rem; } .modal-title { font-size: 1.5rem; } .modal-hero { height: 220px; } .carousel-slide { height: 260px; }
-    .projects-grid { grid-template-columns: 1fr; }
+    /* Paksa projects grid jadi 1 kolom di tablet/HP */
+    .projects-grid { grid-template-columns: 1fr !important; }
   }
   @media (max-width: 480px) {
     .hero-text h1 { font-size: 2.3rem; } .photo-frame { width: 240px; height: 300px; } .hero-buttons { flex-direction: column; } .btn { width: 100%; justify-content: center; }
     .modal-overlay { padding: 0.5rem; } .modal-body { padding: 1.2rem; } .modal-title { font-size: 1.3rem; } .component-list { grid-template-columns: 1fr; }
-    .projects-grid { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr !important; gap: 1rem !important; }
+    /* Paksa elemen projects tetap muncul di HP kecil */
+    .reveal.active { opacity: 1 !important; transform: translateY(0) !important; display: block !important; }
+    #projectsGrid { display: grid !important; }
+    .project-card { display: flex !important; opacity: 1 !important; visibility: visible !important; }
   }
 </style>
 </head>
@@ -583,7 +585,10 @@
       </div>
       <div class="section-number">07</div>
     </div>
-       
+    <div class="contact-wrapper reveal">
+      <div class="contact-info">
+        <h3>Informasi Kontak</h3>
+        <p>Saya terbuka untuk peluang kerja, proyek freelance, dan kolaborasi di bidang elektronika, IoT, dan otomasi industri.</p>
         <ul class="contact-list">
           <li class="contact-item">
             <i class="fas fa-envelope"></i>
@@ -592,7 +597,6 @@
               <span>fardaniirfan@gmail.com</span>
             </div>
           </li>
-          
           <li class="contact-item">
             <i class="fas fa-phone"></i>
             <div class="info">
@@ -600,7 +604,6 @@
               <a href="https://wa.me/6282369535344" target="_blank"><span>+62 823-6953-5344</span></a>
             </div>
           </li>
-          
           <li class="contact-item">
             <i class="fas fa-map-marker-alt"></i>
             <div class="info">
@@ -609,12 +612,10 @@
             </div>
           </li>
         </ul>
-        
         <div class="social-links">
           <a href="https://instagram.com/irfanfardanii" target="_blank" title="Instagram">
             <i class="fab fa-instagram"></i>
           </a>
-          
           <a href="https://wa.me/6282369535344" target="_blank" title="WhatsApp">
             <i class="fab fa-whatsapp"></i>
           </a>
